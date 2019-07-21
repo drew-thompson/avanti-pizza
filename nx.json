@@ -1,0 +1,24 @@
+{
+  "npmScope": "avanti-pizza",
+  "implicitDependencies": {
+    "angular.json": "*",
+    "package.json": "*",
+    "tsconfig.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
+  },
+  "projects": {
+    "avanti-pizza-e2e": {
+      "tags": []
+    },
+    "avanti-pizza": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "api-interface": {
+      "tags": []
+    }
+  }
+}
