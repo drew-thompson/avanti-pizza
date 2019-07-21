@@ -60,10 +60,20 @@ const toppings: { [T in ToppingName]: Topping } = {
 };
 
 const recipes: { [T in PizzaName]: ToppingName[] } = {
+  'BBQ Chicken': ['Grilled Chicken', 'Onion', 'Carrot'],
   'Italian Blues': ['Gorgonzola Cheese', 'Spinach', 'Tomatoes'],
   "Ivan's Special": ['Grilled Chicken', 'Mushrooms', 'Tomatoes', 'Red Onion'],
   "Lily's Special": ['Goat Cheese', 'Roasted Eggplant', 'Black Olives', 'Roasted Red Peppers'],
   Margherita: ['Tomatoes', 'Basil'],
   Mollusco: ['Clams', 'Garlic'],
-  Piccante: ['Jalapeños', 'Italian Sausage', 'Black Olives', 'Tomatoes', 'Bell Peppers']
+  Piccante: ['Jalapeños', 'Italian Sausage', 'Black Olives', 'Tomatoes', 'Bell Peppers'],
+  Belmont: ['Italian Sausage', 'Salami', 'Pepperoni', 'Mushrooms'],
+  Combo: ['Caramelized Onion', 'Bell Peppers', 'Italian Sausage', 'Salami', 'Pepperoni', 'Mushrooms'],
+  'Garden Veggie': ['Onion', 'Bell Peppers', 'Mushrooms', 'Tomatoes', 'Black Olives'],
+  'Greek Special': ['Feta Cheese', 'Kalamata Olives', 'Tomatoes', 'Oregano', 'Capers'],
+  Hawaiian: ['Ham', 'Pineapple'],
+  "Lito's Special": ['Grilled Chicken', 'Artichoke Hearts', 'Feta Cheese', 'Garlic'],
+  "Meat Lover's": ['Italian Sausage', 'Salami', 'Pepperoni', 'Ham', 'Bacon', 'Ground Beef'],
+  'Tuscan Chicken': ['Grilled Chicken', 'Sun-dried Tomatoes', 'Mushrooms', 'Garlic'],
+  'Veggie Italiano': ['Roasted Eggplant', 'Zucchini', 'Oregano', 'Roasted Red Peppers', 'Artichoke Hearts']
 };

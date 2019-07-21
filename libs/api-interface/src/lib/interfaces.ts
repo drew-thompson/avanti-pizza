@@ -83,4 +83,20 @@ export type ToppingName =
   | 'Tomatoes'
   | 'Zucchini';
 
-export type PizzaName = 'Italian Blues' | "Ivan's Special" | "Lily's Special" | 'Margherita' | 'Mollusco' | 'Piccante';
+export type PizzaName =
+  | 'BBQ Chicken'
+  | 'Italian Blues'
+  | "Ivan's Special"
+  | "Lily's Special"
+  | 'Margherita'
+  | 'Mollusco'
+  | 'Piccante'
+  | 'Belmont'
+  | 'Combo'
+  | 'Garden Veggie'
+  | 'Greek Special'
+  | 'Hawaiian'
+  | "Meat Lover's"
+  | "Lito's Special"
+  | 'Tuscan Chicken'
+  | 'Veggie Italiano';
