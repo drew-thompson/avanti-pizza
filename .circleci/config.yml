@@ -26,7 +26,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: NG_CLI_ANALTICS="false" npm install
+      - run: NG_CLI_ANALTICS="ci"
+      - run: npm install
 
       - save_cache:
           paths:
