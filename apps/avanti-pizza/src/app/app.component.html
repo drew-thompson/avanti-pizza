@@ -1,8 +1,13 @@
-<div style="text-align:center">
-  <h1>Welcome to avanti-pizza!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png"
-  />
-</div>
-<div>Message: {{ hello$ | async | json }}</div>
+<section class="container">
+
+  <div class="row">
+    <header class="col-12 text-center">
+      <h1>Welcome to avanti-pizza!</h1>
+      <img width="450" src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" />
+    </header>
+  </div>
+
+  <article class=row>
+    <pre class="offset-3 col-6 mt-3">{{ menu$ | async | json }}</pre>
+  </article>
+</section>

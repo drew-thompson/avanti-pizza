@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { Message } from '@avanti-pizza/api-interface';
 
 @Component({
   selector: 'avanti-pizza-root',
@@ -8,6 +7,7 @@ import { Message } from '@avanti-pizza/api-interface';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
+  menu$ = this.http.get('/api/menu');
+
   constructor(private http: HttpClient) {}
 }
