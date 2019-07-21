@@ -37,6 +37,11 @@ export class MenuService {
 
 export const pizzas: Pizza[] = [
   {
+    name: 'BBQ Chicken',
+    description: 'Chicken, fresh onion, carrot, and cilantro with honey barbecue sauce base',
+    thin: true
+  },
+  {
     name: 'Italian Blues',
     description: 'Gorgonzola cheese, spinach and tomatoes with our house pizza sauce',
     thin: true
@@ -65,6 +70,51 @@ export const pizzas: Pizza[] = [
     name: 'Piccante',
     description: 'Jalapeños, sausage, olives, picante sauce, tomatoes, and bell peppers with our house pizza sauce',
     thin: true
+  },
+  {
+    name: 'Belmont',
+    description: 'Italian sausage, salami, pepperoni, and mushrooms with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Combo',
+    description: 'Caramelized onions, bell peppers, sausage, salami, pepperoni, and mushrooms with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Garden Veggie',
+    description: 'Fresh onions, bell peppers, mushrooms, tomatoes, and olives with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Greek Special',
+    description: 'Feta cheese, kalamata olives, tomatoes, oregano, and capers with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Hawaiian',
+    description: 'Ham and pineapple with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: "Lito's Special",
+    description: 'Chicken, artichoke hearts, feta cheese, and garlic with basil pesto sauce base',
+    thin: false
+  },
+  {
+    name: "Meat Lover's",
+    description: 'Italian sausage, salami, pepperoni, ham, bacon, and ground beef with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Tuscan Chicken',
+    description: 'Chicken, sun-dried tomatoes, mushrooms, and garlic with our house pizza sauce',
+    thin: false
+  },
+  {
+    name: 'Veggie Italiano',
+    description: 'Eggplant, zucchini, oregano, roasted red peppers, and artichoke hearts with our house pizza sauce',
+    thin: false
   }
 ];
 
