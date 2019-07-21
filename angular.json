@@ -192,13 +192,6 @@
             ],
             "exclude": ["**/node_modules/**", "!libs/api-interface/**"]
           }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "options": {
-            "jestConfig": "libs/api-interface/jest.config.js",
-            "tsConfig": "libs/api-interface/tsconfig.spec.json"
-          }
         }
       }
     }
