@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npx concurrently \"node dist/apps/api/main.js\" \"ng s --prod\"",
+    "start": "NG_CLI_ANALYTICS=\"false\" npm i -g @angular/cli @angular/compiler-cli typescript && npx concurrently \"node dist/apps/api/main.js\" \"ng s --prod\"",
     "build": "ng b --prod api && ng b --prod avanti-pizza",
     "test": "ng test",
     "lint": "nx lint && ng lint",
