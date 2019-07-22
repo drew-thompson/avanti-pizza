@@ -19,6 +19,12 @@
     },
     "api-interface": {
       "tags": []
+    },
+    "common-ui-custom-material": {
+      "tags": ["platform:frontend", "type:util"]
+    },
+    "shared-ui": {
+      "tags": ["platform:frontend", "type:ui"]
     }
   }
 }

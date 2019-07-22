@@ -1,13 +1,15 @@
 import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CustomMaterialModule } from '@avanti-pizza/common/ui/custom-material';
+import { SharedUiModule } from '@avanti-pizza/shared/ui';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [HttpClientModule]
+      imports: [HttpClientModule, ReactiveFormsModule, SharedUiModule, CustomMaterialModule]
     }).compileComponents();
   }));
 
