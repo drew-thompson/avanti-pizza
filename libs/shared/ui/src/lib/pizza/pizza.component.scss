@@ -1,3 +1,7 @@
+:host {
+	font-weight: 100;
+}
+
 p {
 	max-width: 95%;
 }
@@ -6,4 +10,8 @@ pre {
 	white-space: pre-wrap;
 	border-radius: 0.5rem;
 	background-color: #f1f1f2;
+}
+
+.included {
+	font-style: italic;
 }

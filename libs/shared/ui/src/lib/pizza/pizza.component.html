@@ -4,3 +4,10 @@
 <pre *ngIf="pizza.pricing as pricing">
   {{ pricing | json }}
 </pre>
+
+<h3>Toppings</h3>
+<ul>
+  <li *ngFor="let topping of pizza.toppings" [class.included]="topping.included">
+    {{ topping.name }} <span *ngIf="topping.included">(included)</span>
+  </li>
+</ul>

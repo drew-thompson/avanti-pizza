@@ -26,8 +26,12 @@ export interface BasePricing {
 }
 
 export interface Topping {
+  /** The name of the topping. */
   name?: string;
+  /** Whether the topping will be billed as a premium ingredient. */
   premium: boolean;
+  /** Whether the topping is included in the recipe without charge. */
+  included?: boolean;
 }
 
 export interface Pizza {
@@ -41,6 +45,14 @@ export interface Pizza {
 export interface PizzaMenu {
   [name: string]: Pizza;
 }
+
+export type Sauce =
+  | 'House Pizza Sauce'
+  | 'Honey Barbeque Sauce'
+  | 'Savory Garlic Sauce'
+  | 'Piccante Sauce'
+  | 'Basil Pesto Sauce'
+  | 'Ranch Sauce';
 
 export type ToppingName =
   | 'Anchovies'
@@ -81,7 +93,9 @@ export type ToppingName =
   | 'Spinach'
   | 'Sun-dried Tomatoes'
   | 'Tomatoes'
-  | 'Zucchini';
+  | 'Zucchini'
+  | 'Cilantro'
+  | Sauce;
 
 export type PizzaName =
   | 'BBQ Chicken'
