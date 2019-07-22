@@ -56,23 +56,31 @@ const toppings: { [T in ToppingName]: Topping } = {
   Spinach: { name: 'Spinach', premium: false },
   'Sun-dried Tomatoes': { name: 'Sun-dried Tomatoes', premium: false },
   Tomatoes: { name: 'Tomatoes', premium: false },
-  Zucchini: { name: 'Zucchini', premium: false }
+  Zucchini: { name: 'Zucchini', premium: false },
+  // Included/Free Ingredients
+  Cilantro: { name: 'Cilantro', premium: false, included: true },
+  'Basil Pesto Sauce': { name: 'Basil Pesto Sauce', premium: false, included: true },
+  'Honey Barbeque Sauce': { name: 'Honey Barbeque Sauce', premium: false, included: true },
+  'House Pizza Sauce': { name: 'House Pizza Sauce', premium: false, included: true },
+  'Piccante Sauce': { name: 'Piccante Sauce', premium: false, included: true },
+  'Ranch Sauce': { name: 'Ranch Sauce', premium: false, included: true },
+  'Savory Garlic Sauce': { name: 'Savory Garlic Sauce', premium: false, included: true }
 };
 
 const recipes: { [T in PizzaName]: ToppingName[] } = {
-  'BBQ Chicken': ['Grilled Chicken', 'Onion', 'Carrot'],
+  'BBQ Chicken': ['Grilled Chicken', 'Onion', 'Carrot', 'Cilantro', 'Honey Barbeque Sauce'],
   'Italian Blues': ['Gorgonzola Cheese', 'Spinach', 'Tomatoes'],
-  "Ivan's Special": ['Grilled Chicken', 'Mushrooms', 'Tomatoes', 'Red Onion'],
+  "Ivan's Special": ['Grilled Chicken', 'Mushrooms', 'Tomatoes', 'Red Onion', 'Ranch Sauce'],
   "Lily's Special": ['Goat Cheese', 'Roasted Eggplant', 'Black Olives', 'Roasted Red Peppers'],
   Margherita: ['Tomatoes', 'Basil'],
-  Mollusco: ['Clams', 'Garlic'],
+  Mollusco: ['Clams', 'Garlic', 'Savory Garlic Sauce'],
   Piccante: ['Jalapeños', 'Italian Sausage', 'Black Olives', 'Tomatoes', 'Bell Peppers'],
   Belmont: ['Italian Sausage', 'Salami', 'Pepperoni', 'Mushrooms'],
   Combo: ['Caramelized Onion', 'Bell Peppers', 'Italian Sausage', 'Salami', 'Pepperoni', 'Mushrooms'],
   'Garden Veggie': ['Onion', 'Bell Peppers', 'Mushrooms', 'Tomatoes', 'Black Olives'],
   'Greek Special': ['Feta Cheese', 'Kalamata Olives', 'Tomatoes', 'Oregano', 'Capers'],
   Hawaiian: ['Ham', 'Pineapple'],
-  "Lito's Special": ['Grilled Chicken', 'Artichoke Hearts', 'Feta Cheese', 'Garlic'],
+  "Lito's Special": ['Grilled Chicken', 'Artichoke Hearts', 'Feta Cheese', 'Garlic', 'Basil Pesto Sauce'],
   "Meat Lover's": ['Italian Sausage', 'Salami', 'Pepperoni', 'Ham', 'Bacon', 'Ground Beef'],
   'Tuscan Chicken': ['Grilled Chicken', 'Sun-dried Tomatoes', 'Mushrooms', 'Garlic'],
   'Veggie Italiano': ['Roasted Eggplant', 'Zucchini', 'Oregano', 'Roasted Red Peppers', 'Artichoke Hearts']

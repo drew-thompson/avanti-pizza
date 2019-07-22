@@ -1,15 +1,15 @@
-<section class="container">
+<section class="container-fluid">
 
   <div class="row">
     <header class="col-12 text-center">
       <h1>Welcome to avanti-pizza!</h1>
-      <img width="450" src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" />
+      <img width="450" src="https://raw.githubusercontent.com/nrwl/nx/master/nx-logo.png" class="mw-100" />
     </header>
   </div>
 
   <article class=row>
 
-    <div class="col-4 sticky">
+    <div class="col-6 col-sm-5 col-md-4 sticky">
       <mat-form-field appearance="standard">
         <mat-label>Search a Pizza</mat-label>
         <input matInput [matAutocomplete]="auto" type="search" autocomplete="off"
@@ -19,7 +19,7 @@
         </button>
       </mat-form-field>
 
-      <mat-autocomplete #auto>
+      <mat-autocomplete #auto autoActiveFirstOption>
         <ng-container *ngIf="filteredPizzas$ | async as filtered">
 
           <ng-container *ngFor="let pizza of filtered">
@@ -34,15 +34,14 @@
 
         </ng-container>
       </mat-autocomplete>
-    </div>
 
-    <div class="col-4 sticky">
       <ng-container *ngIf="selectedPizza$ | async as selected">
         <avanti-pizza [pizza]="selected"></avanti-pizza>
       </ng-container>
-
     </div>
 
-    <pre class="col-4 mt-3">{{ menu$ | async | json }}</pre>
+    <div class="col mt-3">
+      <pre>{{ menu$ | async | json }}</pre>
+    </div>
   </article>
 </section>

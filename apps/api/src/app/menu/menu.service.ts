@@ -13,7 +13,7 @@ export class MenuService {
     const premiumToppingCost = toppingCost * 2;
 
     const premiumToppingCount = toppings.filter(topping => topping.premium).length;
-    const basicToppingCount = toppings.length - premiumToppingCount;
+    const basicToppingCount = toppings.filter(t => !t.included).length - premiumToppingCount;
 
     return +(baseCost + basicToppingCount * toppingCost + premiumToppingCount * premiumToppingCost).toFixed(2);
   }
