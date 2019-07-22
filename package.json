@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npx concurrently \"node dist/apps/api/main.js\" \"ng s --prod\"",
-    "build": "ng build",
+    "build": "ng b --prod api && ng b --prod avanti-pizza",
     "test": "ng test",
     "lint": "nx lint && ng lint",
     "e2e": "ng e2e",
