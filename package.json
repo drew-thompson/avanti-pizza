@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npx concurrently \"node dist/apps/api/main.js\" \"node dist/apps/avanti-pizza/server\"",
     "build": "ng build",
     "test": "ng test",
     "lint": "nx lint && ng lint",
