@@ -16,7 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@avanti-pizza/api-interface": ["libs/api-interface/src/index.ts"]
+      "@avanti-pizza/api-interface": ["libs/api-interface/src/index.ts"],
+      "@avanti-pizza/common/ui/custom-material": ["libs/common/ui/custom-material/src/index.ts"],
+      "@avanti-pizza/shared/ui": ["libs/shared/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

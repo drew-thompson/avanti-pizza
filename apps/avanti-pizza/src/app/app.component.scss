@@ -1,5 +1,19 @@
+mat-form-field.mat-form-field {
+	width: 100%;
+}
+
 pre {
 	white-space: pre-wrap;
 	border-radius: 0.5rem;
 	background-color: #f1f1f2;
+}
+
+.sticky {
+	position: sticky;
+	top: 2rem;
+	height: fit-content;
+}
+
+button:focus {
+	outline-width: 0;
 }

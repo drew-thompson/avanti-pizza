@@ -30,12 +30,13 @@ export class MenuService {
 
   getPizzas(): Pizza[] {
     return pizzas.map(p => {
-      return { ...p, toppings: this.toppingsService.getPizzaToppings(p.name) };
+      const topped = { ...p, toppings: this.toppingsService.getPizzaToppings(p.name) };
+      return { ...topped, pricing: this.calculatePricingChart(topped) };
     });
   }
 }
 
-export const pizzas: Pizza[] = [
+export const pizzas: Readonly<Pizza[]> = [
   {
     name: 'BBQ Chicken',
     description: 'Chicken, fresh onion, carrot, and cilantro with honey barbecue sauce base',
