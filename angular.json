@@ -369,6 +369,105 @@
           }
         }
       }
+    },
+    "menu-feature-calculate": {
+      "projectType": "library",
+      "root": "libs/menu/feature-calculate",
+      "sourceRoot": "libs/menu/feature-calculate/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/menu/feature-calculate/tsconfig.lib.json", "libs/menu/feature-calculate/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/menu/feature-calculate/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/menu/feature-calculate/jest.config.js",
+            "tsConfig": "libs/menu/feature-calculate/tsconfig.spec.json",
+            "setupFile": "libs/menu/feature-calculate/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "toppings-data-access": {
+      "projectType": "library",
+      "root": "libs/toppings/data-access",
+      "sourceRoot": "libs/toppings/data-access/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/toppings/data-access/tsconfig.lib.json", "libs/toppings/data-access/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/toppings/data-access/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/toppings/data-access/jest.config.js",
+            "tsConfig": "libs/toppings/data-access/tsconfig.spec.json",
+            "setupFile": "libs/toppings/data-access/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "common-utils": {
+      "root": "libs/common/utils",
+      "sourceRoot": "libs/common/utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/common/utils/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/common/utils/**"]
+          }
+        }
+      }
+    },
+    "menu-feature-select": {
+      "projectType": "library",
+      "root": "libs/menu/feature-select",
+      "sourceRoot": "libs/menu/feature-select/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/menu/feature-select/tsconfig.lib.json", "libs/menu/feature-select/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/menu/feature-select/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/menu/feature-select/jest.config.js",
+            "tsConfig": "libs/menu/feature-select/tsconfig.spec.json",
+            "setupFile": "libs/menu/feature-select/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

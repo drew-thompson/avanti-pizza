@@ -18,20 +18,20 @@ export class MenuService {
     return +(baseCost + basicToppingCount * toppingCost + premiumToppingCount * premiumToppingCost).toFixed(2);
   }
 
-  calculatePricingChart(pizza: Pizza): PricingChart {
+  calculatePricingChart(toppings: Topping[]): PricingChart {
     return {
-      slice: this.calculatePrice('slice', pizza.toppings),
-      '12': this.calculatePrice('12', pizza.toppings),
-      '14': this.calculatePrice('14', pizza.toppings),
-      '16': this.calculatePrice('16', pizza.toppings),
-      '18': this.calculatePrice('18', pizza.toppings)
+      slice: this.calculatePrice('slice', toppings),
+      '12': this.calculatePrice('12', toppings),
+      '14': this.calculatePrice('14', toppings),
+      '16': this.calculatePrice('16', toppings),
+      '18': this.calculatePrice('18', toppings)
     };
   }
 
   getPizzas(): Pizza[] {
     return pizzas.map(p => {
       const topped = { ...p, toppings: this.toppingsService.getPizzaToppings(p.name) };
-      return { ...topped, pricing: this.calculatePricingChart(topped) };
+      return { ...topped, pricing: this.calculatePricingChart(topped.toppings) };
     });
   }
 }
@@ -119,7 +119,7 @@ export const pizzas: Readonly<Pizza[]> = [
   }
 ];
 
-export const basePizzaPricing: BasePricingChart = {
+export const basePizzaPricing: Readonly<BasePricingChart> = {
   slice: { cost: 3.75, toppingCost: 0.4 },
   '12': { cost: 14.1, toppingCost: 1.5 },
   '14': { cost: 17.5, toppingCost: 2 },

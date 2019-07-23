@@ -43,6 +43,18 @@
     },
     "common-styles": {
       "tags": ["platform:frontend", "type:util"]
+    },
+    "menu-feature-calculate": {
+      "tags": ["platform:frontend", "type:feature"]
+    },
+    "toppings-data-access": {
+      "tags": ["platform:frontend", "type:data-access"]
+    },
+    "common-utils": {
+      "tags": ["platform:shared", "type:util"]
+    },
+    "menu-feature-select": {
+      "tags": ["platform:frontend", "type:feature"]
     }
   }
 }

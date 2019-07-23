@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material';
 import { Pizza } from '@avanti-pizza/api-interface';
+import { RegexUtils } from '@avanti-pizza/common/utils';
 import { MenuService } from '@avanti-pizza/menu/data-access';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
@@ -70,12 +71,7 @@ export class SearchComponent implements OnInit {
         return pizzas.filter(p => p.name.match(looseRegex));
       case 'sequence':
       default:
-        const expression = query
-          .split('')
-          .map(c => `.*${c}`)
-          .join('');
-        const regex = new RegExp(`^${expression}.*$`, 'i');
-        return pizzas.filter(p => p.name.match(regex));
+        return pizzas.filter(p => p.name.match(RegexUtils.getSequenceMatcher({ query })));
     }
   }
 }

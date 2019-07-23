@@ -4,26 +4,14 @@ mat-form-field.mat-form-field {
 	width: 100%;
 }
 
-section {
-	font-size: 0.75rem;
-	@include media-breakpoint-up(sm) {
-		font-size: 1rem;
-	}
-}
-
-button:focus {
-	outline-width: 0;
-}
-
 #form {
 	padding-top: 1rem;
 	position: sticky;
 	top: 0;
 	background: white;
-	z-index: 1;
 }
 
-#menu {
+#ingredients {
 	h3 {
 		@include media-breakpoint-up(sm) {
 			position: fixed;
@@ -34,18 +22,22 @@ button:focus {
 		}
 	}
 
-	pre {
-		white-space: pre-wrap;
+	ul {
 		background-color: #f1f1f2;
 		border-radius: 0.5rem;
 
 		@include media-breakpoint-up(sm) {
-			margin-top: 5vh;
 			height: 94vh;
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
+			margin-top: 5vh;
 			margin-bottom: 0;
 			overflow: scroll;
 		}
 	}
+}
+
+.sticky {
+	position: sticky;
+	height: min-content;
 }

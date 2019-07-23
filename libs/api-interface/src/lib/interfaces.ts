@@ -27,7 +27,7 @@ export interface BasePricing {
 
 export interface Topping {
   /** The name of the topping. */
-  name?: string;
+  name?: ToppingName;
   /** Whether the topping will be billed as a premium ingredient. */
   premium: boolean;
   /** Whether the topping is included in the recipe without charge. */
