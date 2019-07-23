@@ -1,0 +1,39 @@
+<section class="container-fluid">
+  <article class=row>
+
+    <div class="col-6 col-sm-5 col-md-4 sticky">
+      <mat-form-field appearance="standard">
+        <mat-label>Search a Pizza</mat-label>
+        <input matInput [matAutocomplete]="auto" type="search" autocomplete="off"
+          placeholder="I'll show you a Lito Special!" [formControl]="searchControl">
+        <button matSuffix mat-icon-button (click)="reset()">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-autocomplete #auto autoActiveFirstOption>
+        <ng-container *ngIf="filteredPizzas$ | async as filtered">
+
+          <ng-container *ngFor="let pizza of filtered">
+
+            <mat-option (onSelectionChange)="select($event, pizza)" [value]="pizza.name">
+              {{ pizza.name }}
+            </mat-option>
+
+          </ng-container>
+
+          <mat-option *ngIf="!filtered.length" (onSelectionChange)="reset()" value="">Pizza not found! 🙀</mat-option>
+
+        </ng-container>
+      </mat-autocomplete>
+
+      <ng-container *ngIf="selectedPizza$ | async as selected">
+        <avanti-pizza [pizza]="selected"></avanti-pizza>
+      </ng-container>
+    </div>
+
+    <div class="col mt-3">
+      <pre>{{ menu$ | async | json }}</pre>
+    </div>
+  </article>
+</section>

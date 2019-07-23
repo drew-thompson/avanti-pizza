@@ -25,6 +25,18 @@
     },
     "shared-ui": {
       "tags": ["platform:frontend", "type:ui"]
+    },
+    "menu-feature-search": {
+      "tags": ["platform:frontend", "type:feature"]
+    },
+    "menu-feature-shell": {
+      "tags": ["platform:frontend", "type:feature"]
+    },
+    "menu-data-access": {
+      "tags": ["platform:frontend", "type:data-access"]
+    },
+    "core-config": {
+      "tags": ["platform:frontend", "type:util"]
     }
   }
 }
