@@ -7,11 +7,14 @@ import { Pizza } from '@avanti-pizza/api-interface';
   styleUrls: ['./pizza.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PizzaComponent implements OnInit {
+export class PizzaComponent {
   /** Pizza to display. */
   @Input() pizza: Pizza;
 
-  constructor() {}
-
-  ngOnInit() {}
+  getTooltipText(): string {
+    if (this.pizza.thin) {
+      return 'Thin Crust Pizza';
+    }
+    return 'Regular Crust Pizza';
+  }
 }

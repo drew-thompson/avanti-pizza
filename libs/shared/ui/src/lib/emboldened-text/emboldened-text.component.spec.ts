@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CommonPipesModule } from '@avanti-pizza/common/pipes';
 import { EmboldenedTextComponent } from './emboldened-text.component';
-import { By } from '@angular/platform-browser';
 
 describe('EmboldenedTextComponent', () => {
   let component: EmboldenedTextComponent;

@@ -2,6 +2,21 @@
 	font-weight: 100;
 }
 
+h5 {
+	display: inline-block;
+	font-weight: normal;
+}
+
+img {
+	width: 30px;
+	margin-left: 0.5rem;
+
+	&.regular {
+		margin-top: -5px;
+		width: 20px;
+	}
+}
+
 pre {
 	white-space: pre-wrap;
 	border-radius: 0.5rem;

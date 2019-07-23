@@ -17,7 +17,7 @@ export class EmboldenedTextComponent {
 
   getMatchedIndices(): number[] {
     const indices: number[] = [];
-    const query = this.query;
+    const query = this.query.toLowerCase();
     const text = this.text.toLowerCase();
 
     let matchedIndex = 0;
