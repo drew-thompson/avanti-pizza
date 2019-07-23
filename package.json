@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "NG_CLI_ANALYTICS=\"false\" npm i -g @angular/cli @angular/compiler-cli @angular-devkit/build-angular typescript && npx concurrently \"node dist/apps/api/main.js\" \"ng s --prod\"",
     "build": "ng b --prod api && ng b --prod avanti-pizza",
-    "test": "ng test",
+    "test": "npm run affected:test",
     "lint": "nx lint && ng lint",
     "e2e": "ng e2e",
     "serve:avanti": "ng s avanti-pizza",
