@@ -1,4 +1,5 @@
 import { PizzaName, Topping, ToppingName } from '@avanti-pizza/api-interface';
+import { RegexUtils } from '@avanti-pizza/common/utils';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -15,9 +16,14 @@ export class ToppingsService {
   getTopping(topping: ToppingName): Topping {
     return toppings[topping];
   }
+
+  findAllToppings(query: string): Topping[] {
+    const pattern = RegexUtils.getSequenceMatcher({ query });
+    return this.getAllToppings().filter(t => t.name.match(pattern));
+  }
 }
 
-const toppings: { [T in ToppingName]: Topping } = {
+const toppings: Readonly<{ [T in ToppingName]: Topping }> = {
   Anchovies: { name: 'Anchovies', premium: true },
   'Artichoke Hearts': { name: 'Artichoke Hearts', premium: false },
   'Baby Arugula': { name: 'Baby Arugula', premium: false },
@@ -67,7 +73,7 @@ const toppings: { [T in ToppingName]: Topping } = {
   'Savory Garlic Sauce': { name: 'Savory Garlic Sauce', premium: false, included: true }
 };
 
-const recipes: { [T in PizzaName]: ToppingName[] } = {
+const recipes: Readonly<{ [T in PizzaName]: ToppingName[] }> = {
   'BBQ Chicken': ['Grilled Chicken', 'Onion', 'Carrot', 'Cilantro', 'Honey Barbeque Sauce'],
   'Italian Blues': ['Gorgonzola Cheese', 'Spinach', 'Tomatoes'],
   "Ivan's Special": ['Grilled Chicken', 'Mushrooms', 'Tomatoes', 'Red Onion', 'Ranch Sauce'],

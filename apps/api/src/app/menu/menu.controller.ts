@@ -1,10 +1,11 @@
-import { Pizza, PizzaMenu } from '@avanti-pizza/api-interface';
-import { Controller, Get } from '@nestjs/common';
+import { Pizza, PizzaMenu, PizzaSize, PricingChart, Topping, ToppingName } from '@avanti-pizza/api-interface';
+import { Controller, Get, Query } from '@nestjs/common';
+import { ToppingsService } from '../toppings/toppings.service';
 import { MenuService } from './menu.service';
 
 @Controller('menu')
 export class MenuController {
-  constructor(private menuService: MenuService) {}
+  constructor(private menuService: MenuService, private toppingsService: ToppingsService) {}
 
   @Get()
   getMenu(): PizzaMenu {
@@ -17,5 +18,38 @@ export class MenuController {
   @Get('pizzas')
   getPizzas(): Pizza[] {
     return this.menuService.getPizzas();
+  }
+
+  /**
+   * Calculates one or more prices for a given pizza of size and toppings.
+   * @param complete Whether the complete pricing chart should be calculated
+   * @param size Size of the pizza
+   * @param toppings Toppings served hot!
+   */
+  @Get('pizzas/calculate')
+  calculatePrice(
+    @Query('complete') complete: boolean,
+    @Query('size') size: PizzaSize,
+    @Query('toppings') toppings: string
+  ): number | PricingChart {
+    if (!complete && this.sizeInvalid(size)) {
+      return undefined;
+    }
+
+    let names: ToppingName[];
+    let foundToppings: Topping[] = [];
+    if (toppings) {
+      names = toppings.split(',') as ToppingName[];
+      foundToppings = names.map(n => this.toppingsService.getTopping(n)).filter(t => t);
+    }
+    if (!complete) {
+      return this.menuService.calculatePrice(size, foundToppings);
+    } else {
+      return this.menuService.calculatePricingChart(foundToppings);
+    }
+  }
+
+  private sizeInvalid(size: PizzaSize): boolean {
+    return size !== 'slice' && size !== '12' && size !== '14' && size !== '16' && size !== '18';
   }
 }
