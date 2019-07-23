@@ -11,10 +11,20 @@ export class PizzaComponent {
   /** Pizza to display. */
   @Input() pizza: Pizza;
 
-  getTooltipText(): string {
+  /**
+   * Returns the text representation of this pizza's crust type.
+   */
+  getCrustDescription(): string {
     if (this.pizza.thin) {
-      return 'Thin Crust Pizza';
+      return 'Thin Crust';
     }
-    return 'Regular Crust Pizza';
+    return 'Regular Crust';
+  }
+
+  /**
+   * Whether this pizza has at least one premium topping.
+   */
+  hasPremiumTopping(): boolean {
+    return this.pizza.toppings.some(t => t.premium);
   }
 }

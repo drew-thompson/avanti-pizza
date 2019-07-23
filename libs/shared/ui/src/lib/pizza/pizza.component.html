@@ -1,7 +1,7 @@
 <h2>{{ pizza.name }}</h2>
 
-<h5>{{ pizza.thin ? 'Thin' : 'Regular' }} Crust Pizza</h5>
-<img src="assets/images/menu/{{ pizza.thin ? 'thin-' : '' }}pie-icon.png" [alt]="getTooltipText()"
+<h5>{{ getCrustDescription() }} Pizza</h5>
+<img src="assets/images/menu/{{ pizza.thin ? 'thin-' : '' }}pie-icon.png" [alt]="getCrustDescription()"
   [class.regular]="!pizza.thin">
 
 <p>{{ pizza.description }}</p>
@@ -13,6 +13,8 @@
 <h3>Toppings</h3>
 <ul>
   <li *ngFor="let topping of pizza.toppings" [class.included]="topping.included">
-    {{ topping.name }} <span *ngIf="topping.included">(included)</span>
+    {{ topping.name }}<span *ngIf="topping.premium">*</span> <span *ngIf="topping.included">(included)</span>
   </li>
 </ul>
+
+<small><i *ngIf="hasPremiumTopping()">*Premium topping, charged as two toppings</i></small>
