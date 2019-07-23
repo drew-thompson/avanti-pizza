@@ -1,15 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
+import { APP_BASE_HREF } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CustomMaterialModule } from '@avanti-pizza/common/ui/custom-material';
-import { SharedUiModule } from '@avanti-pizza/shared/ui';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
-      imports: [HttpClientModule, ReactiveFormsModule, SharedUiModule, CustomMaterialModule]
+      imports: [AppRoutingModule, BrowserAnimationsModule, HttpClientTestingModule],
+      providers: [{ provide: APP_BASE_HREF, useValue: '/' }]
     }).compileComponents();
   }));
 

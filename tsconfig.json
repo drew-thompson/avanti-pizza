@@ -18,7 +18,11 @@
     "paths": {
       "@avanti-pizza/api-interface": ["libs/api-interface/src/index.ts"],
       "@avanti-pizza/common/ui/custom-material": ["libs/common/ui/custom-material/src/index.ts"],
-      "@avanti-pizza/shared/ui": ["libs/shared/ui/src/index.ts"]
+      "@avanti-pizza/shared/ui": ["libs/shared/ui/src/index.ts"],
+      "@avanti-pizza/menu/feature-search": ["libs/menu/feature-search/src/index.ts"],
+      "@avanti-pizza/menu/feature-shell": ["libs/menu/feature-shell/src/index.ts"],
+      "@avanti-pizza/menu/data-access": ["libs/menu/data-access/src/index.ts"],
+      "@avanti-pizza/core/config": ["libs/core/config/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
