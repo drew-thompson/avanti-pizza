@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material';
 import { Pizza } from '@avanti-pizza/api-interface';
@@ -9,7 +9,8 @@ import { debounceTime, distinctUntilChanged, withLatestFrom } from 'rxjs/operato
 @Component({
   selector: 'avanti-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchComponent implements OnInit {
   menu$ = this.menuService.getMenu();
@@ -21,6 +22,11 @@ export class SearchComponent implements OnInit {
 
   filteredPizzas$: Subject<Pizza[]> = new Subject<Pizza[]>();
   selectedPizza$: Subject<Pizza> = new Subject<Pizza>();
+  /** Characters that */
+  filteredCharacterMatches: Subject<number[]> = new Subject<number[]>();
+
+  readonly filterStyle: 'exact' | 'loose' | 'sequence' = 'sequence';
+  filterStyleControl = new FormControl(this.filterStyle);
 
   constructor(private menuService: MenuService) {}
 
@@ -34,7 +40,8 @@ export class SearchComponent implements OnInit {
       .subscribe(arr => {
         const query = arr[0];
         const pizzas = arr[1];
-        const filtered = pizzas.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+
+        const filtered = this.getFilteredPizzas({ query, pizzas });
         this.filteredPizzas$.next(filtered);
       });
   }
@@ -48,5 +55,27 @@ export class SearchComponent implements OnInit {
   reset(): void {
     this.searchControl.patchValue('');
     this.selectedPizza$.next();
+  }
+
+  private getFilteredPizzas({ query, pizzas }: { query: string; pizzas: Pizza[] }): Pizza[] {
+    switch (this.filterStyleControl.value) {
+      case 'exact':
+        return pizzas.filter(p => p.name.toLowerCase().includes(query.toLowerCase()));
+      case 'loose':
+        const looseExpression = query
+          .split('')
+          .map(c => `(?=.*${c})`)
+          .join('');
+        const looseRegex = new RegExp(`^${looseExpression}.+$`, 'i');
+        return pizzas.filter(p => p.name.match(looseRegex));
+      case 'sequence':
+      default:
+        const expression = query
+          .split('')
+          .map(c => `.*${c}`)
+          .join('');
+        const regex = new RegExp(`^${expression}.*$`, 'i');
+        return pizzas.filter(p => p.name.match(regex));
+    }
   }
 }

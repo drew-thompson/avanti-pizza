@@ -37,6 +37,12 @@
     },
     "core-config": {
       "tags": ["platform:frontend", "type:util"]
+    },
+    "common-pipes": {
+      "tags": ["platform:frontend", "type:util"]
+    },
+    "common-styles": {
+      "tags": ["platform:frontend", "type:util"]
     }
   }
 }

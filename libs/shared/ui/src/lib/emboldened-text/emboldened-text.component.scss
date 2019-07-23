@@ -1,0 +1,26 @@
+@import 'ap-variables';
+
+div[class^='avanti-emboldened-text'] {
+	strong {
+		font-weight: 500;
+	}
+}
+
+.avanti-emboldened-text {
+	&-primary {
+		strong {
+			color: $primary;
+		}
+	}
+
+	&-accent {
+		strong {
+			color: $accent;
+		}
+	}
+	&-warn {
+		strong {
+			color: $warn;
+		}
+	}
+}

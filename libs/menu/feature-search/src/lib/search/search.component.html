@@ -1,4 +1,4 @@
-<section class="container-fluid">
+<section class="container-fluid menu-feature-search">
   <article class=row>
 
     <div class="col-6 col-sm-5 col-md-4 sticky">
@@ -11,18 +11,21 @@
         </button>
       </mat-form-field>
 
-      <mat-autocomplete #auto autoActiveFirstOption>
+      <mat-autocomplete #auto autoActiveFirstOption class="text-light">
         <ng-container *ngIf="filteredPizzas$ | async as filtered">
 
           <ng-container *ngFor="let pizza of filtered">
 
             <mat-option (onSelectionChange)="select($event, pizza)" [value]="pizza.name">
-              {{ pizza.name }}
+              <avanti-emboldened-text [query]="searchControl.value" [text]="pizza.name" color="accent">
+              </avanti-emboldened-text>
             </mat-option>
 
           </ng-container>
 
-          <mat-option *ngIf="!filtered.length" (onSelectionChange)="reset()" value="">Pizza not found! 🙀</mat-option>
+          <mat-option *ngIf="!filtered.length" (onSelectionChange)="reset()" value="">
+            Pizza not found! 🙀🔍❓
+          </mat-option>
 
         </ng-container>
       </mat-autocomplete>
