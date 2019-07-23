@@ -1,3 +1,43 @@
+@import 'functions', 'variables', 'mixins';
+
 mat-form-field.mat-form-field {
 	width: 100%;
+}
+
+#form {
+	padding-top: 1rem;
+	position: sticky;
+	top: 0;
+	background: white;
+}
+
+#ingredients {
+	h3 {
+		@include media-breakpoint-up(sm) {
+			position: fixed;
+			top: 0;
+			width: 100%;
+			padding-bottom: 0.25rem;
+			background-color: white;
+		}
+	}
+
+	ul {
+		background-color: #f1f1f2;
+		border-radius: 0.5rem;
+
+		@include media-breakpoint-up(sm) {
+			height: 94vh;
+			padding-top: 0.5rem;
+			padding-bottom: 0.5rem;
+			margin-top: 5vh;
+			margin-bottom: 0;
+			overflow: scroll;
+		}
+	}
+}
+
+.sticky {
+	position: sticky;
+	height: min-content;
 }

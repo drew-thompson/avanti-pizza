@@ -440,6 +440,34 @@
           }
         }
       }
+    },
+    "menu-feature-select": {
+      "projectType": "library",
+      "root": "libs/menu/feature-select",
+      "sourceRoot": "libs/menu/feature-select/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/menu/feature-select/tsconfig.lib.json", "libs/menu/feature-select/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/menu/feature-select/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/menu/feature-select/jest.config.js",
+            "tsConfig": "libs/menu/feature-select/tsconfig.spec.json",
+            "setupFile": "libs/menu/feature-select/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

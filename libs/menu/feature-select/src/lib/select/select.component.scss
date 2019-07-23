@@ -1,0 +1,15 @@
+mat-card.mat-card {
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.5rem;
+	max-width: 250px;
+	margin: 0 1rem 1rem 0;
+
+	mat-card-actions.mat-card-actions {
+		margin-top: auto;
+		text-align: right;
+		button:focus {
+			outline: none;
+		}
+	}
+}

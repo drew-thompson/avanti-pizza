@@ -1,39 +1,68 @@
 <section class="container-fluid">
   <article class="row">
 
-    <div class="col">
+    <div class="col pb-3">
 
-      <mat-form-field appearance="standard">
-        <mat-label>Add some ingredients</mat-label>
-        <mat-chip-list #added>
-          <ng-container *ngFor="let topping of selectedToppings$ | async">
-            <mat-chip [selectable]="true" (removed)="remove(topping)">
-              {{ topping.name }}
-              <mat-icon matChipRemove>clear</mat-icon>
-            </mat-chip>
+      <div id="form">
+        <h1 class="mb-0">Create a Pizza</h1>
+
+        <mat-form-field appearance="standard">
+          <mat-label>Add some ingredients</mat-label>
+          <mat-chip-list #added>
+            <ng-container *ngFor="let topping of selectedToppings$ | async">
+              <mat-chip [selectable]="true" (removed)="remove(topping)">
+                {{ topping.name }}
+                <mat-icon matChipRemove>clear</mat-icon>
+              </mat-chip>
+            </ng-container>
+
+            <input #input matInput [matAutocomplete]="toppingsAuto" type="search" autocomplete="off"
+              [matChipInputFor]="added" placeholder="Bell Peppers, Tomatoes, Onion..." [formControl]="recipeControl">
+
+          </mat-chip-list>
+          <button matSuffix mat-icon-button matTooltip="Clear all selections" matTooltipPosition="above"
+            (click)="clear()">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-autocomplete #toppingsAuto autoActiveFirstOption>
+          <ng-container *ngIf="filteredToppings$ | async as filtered">
+
+            <ng-container *ngFor="let topping of filtered">
+              <mat-option (onSelectionChange)="select($event, topping)" [value]="topping.name">
+                <avanti-emboldened-text [query]="recipeControl.value" [text]="topping.name"></avanti-emboldened-text>
+              </mat-option>
+            </ng-container>
+
+            <mat-option *ngIf="!filtered.length" (onSelectionChange)="reset()" value="">
+              Topping not found! 🚫🍅🍄
+            </mat-option>
+
           </ng-container>
+        </mat-autocomplete>
 
-          <input #input matInput [matAutocomplete]="toppingsAuto" type="search" autocomplete="off"
-            [matChipInputFor]="added" placeholder="Bell Peppers, Tomatoes, Onion..." [formControl]="recipeControl">
+      </div>
 
-        </mat-chip-list>
-        <button matSuffix mat-icon-button (click)="reset()">
-          <mat-icon>clear</mat-icon>
-        </button>
-      </mat-form-field>
-
-      <mat-autocomplete #toppingsAuto autoActiveFirstOption>
-        <ng-container *ngFor="let topping of filteredToppings$ | async">
-          <mat-option (onSelectionChange)="select($event, topping)" [value]="topping.name">
-            <avanti-emboldened-text [query]="recipeControl.value" [text]="topping.name"></avanti-emboldened-text>
-          </mat-option>
-        </ng-container>
-
-      </mat-autocomplete>
+      <div *ngIf="pricingChart$ | async as pricing">
+        <avanti-pizza [pizza]="getPizza(pricing)"></avanti-pizza>
+      </div>
 
     </div>
 
-    <div class="col-5">
+    <div class="col-12 col-sm-5 sticky" style="top: 0">
+      <div id="ingredients">
+        <h3>Ingredients</h3>
+
+        <ul>
+          <ng-container *ngIf="toppings$ | async as ingredients">
+            <li *ngFor="let ingredient of ingredients">
+              {{ ingredient.name }}<span *ngIf="ingredient.premium else maybeFree">*</span>
+              <ng-template #maybeFree><i *ngIf="ingredient.included"> (included)</i></ng-template>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
     </div>
 
   </article>
