@@ -25,7 +25,7 @@
             "assets": ["apps/avanti-pizza/src/favicon.ico", "apps/avanti-pizza/src/assets"],
             "styles": ["apps/avanti-pizza/src/styles.scss", "node_modules/bootstrap/scss/bootstrap.scss"],
             "stylePreprocessorOptions": {
-              "includePaths": ["node_modules/bootstrap/scss"]
+              "includePaths": ["node_modules/bootstrap/scss", "libs/common/styles/src/lib"]
             },
             "scripts": []
           },
@@ -323,6 +323,49 @@
           "options": {
             "tsConfig": ["libs/core/config/tsconfig.lib.json"],
             "exclude": ["**/node_modules/**", "!libs/core/config/**"]
+          }
+        }
+      }
+    },
+    "common-pipes": {
+      "projectType": "library",
+      "root": "libs/common/pipes",
+      "sourceRoot": "libs/common/pipes/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/common/pipes/tsconfig.lib.json", "libs/common/pipes/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/common/pipes/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common/pipes/jest.config.js",
+            "tsConfig": "libs/common/pipes/tsconfig.spec.json",
+            "setupFile": "libs/common/pipes/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "common-styles": {
+      "root": "libs/common/styles",
+      "sourceRoot": "libs/common/styles/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/common/styles/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**", "!libs/common/styles/**"]
           }
         }
       }

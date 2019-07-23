@@ -4,11 +4,20 @@ mat-form-field.mat-form-field {
 	width: 100%;
 }
 
+.emboldened-option strong {
+	font-weight: 100;
+	color: blue;
+}
+
 section {
 	font-size: 0.75rem;
 	@include media-breakpoint-up(sm) {
 		font-size: 1rem;
 	}
+}
+
+button:focus {
+	outline-width: 0;
 }
 
 pre {
@@ -21,8 +30,4 @@ pre {
 	position: sticky;
 	top: 2rem;
 	height: fit-content;
-}
-
-button:focus {
-	outline-width: 0;
 }

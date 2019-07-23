@@ -1,0 +1,15 @@
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$avanti-pizza-primary: mat-palette($mat-gray, 900);
+$avanti-pizza-accent: mat-palette($mat-green, A700);
+
+// The warn palette is optional (defaults to red).
+$avanti-pizza-warn: mat-palette($mat-red);
+
+$primary: mat-color($avanti-pizza-primary);
+$accent: mat-color($avanti-pizza-accent);
+$warn: mat-color($avanti-pizza-warn);

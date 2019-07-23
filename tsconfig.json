@@ -22,7 +22,9 @@
       "@avanti-pizza/menu/feature-search": ["libs/menu/feature-search/src/index.ts"],
       "@avanti-pizza/menu/feature-shell": ["libs/menu/feature-shell/src/index.ts"],
       "@avanti-pizza/menu/data-access": ["libs/menu/data-access/src/index.ts"],
-      "@avanti-pizza/core/config": ["libs/core/config/src/index.ts"]
+      "@avanti-pizza/core/config": ["libs/core/config/src/index.ts"],
+      "@avanti-pizza/common/pipes": ["libs/common/pipes/src/index.ts"],
+      "@avanti-pizza/common/styles": ["libs/common/styles/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
