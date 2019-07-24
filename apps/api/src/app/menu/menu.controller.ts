@@ -1,4 +1,15 @@
-import { Pizza, PizzaMenu, PizzaSize, PricingChart, Topping, ToppingName } from '@avanti-pizza/api-interface';
+import {
+  Beer,
+  Beverage,
+  Drink,
+  DrinkAutocompleteType,
+  Pizza,
+  PizzaMenu,
+  PizzaSize,
+  PricingChart,
+  Topping,
+  ToppingName
+} from '@avanti-pizza/api-interface';
 import { Controller, Get, Query } from '@nestjs/common';
 import { ToppingsService } from '../toppings/toppings.service';
 import { MenuService } from './menu.service';
@@ -47,6 +58,26 @@ export class MenuController {
     } else {
       return this.menuService.calculatePricingChart(foundToppings);
     }
+  }
+
+  @Get('drinks')
+  getDrinks(): Readonly<Drink[]> {
+    return this.menuService.getDrinks();
+  }
+
+  @Get('drinks/autocomplete')
+  findAll(@Query('q') query: string, @Query('type') type?: DrinkAutocompleteType): Drink[] {
+    return this.menuService.findAllDrinks({ query, type });
+  }
+
+  @Get('drinks/beers')
+  getBeers(): Readonly<Beer[]> {
+    return this.menuService.getBeers();
+  }
+
+  @Get('drinks/beverages')
+  getBeverages(): Readonly<Beverage[]> {
+    return this.menuService.getBeverages();
   }
 
   private sizeInvalid(size: PizzaSize): boolean {

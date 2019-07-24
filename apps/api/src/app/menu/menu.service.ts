@@ -1,4 +1,16 @@
-import { BasePricingChart, Pizza, PizzaSize, PricingChart, Topping } from '@avanti-pizza/api-interface';
+import {
+  BasePricingChart,
+  Beer,
+  BeerTypePricing,
+  Beverage,
+  Drink,
+  DrinkAutocompleteType,
+  Pizza,
+  PizzaSize,
+  PricingChart,
+  Topping
+} from '@avanti-pizza/api-interface';
+import { RegexUtils } from '@avanti-pizza/common/utils';
 import { Injectable } from '@nestjs/common';
 import { ToppingsService } from '../toppings/toppings.service';
 
@@ -33,6 +45,38 @@ export class MenuService {
       const topped = { ...p, toppings: this.toppingsService.getPizzaToppings(p.name) };
       return { ...topped, pricing: this.calculatePricingChart(topped.toppings) };
     });
+  }
+
+  getDrinks(): Readonly<Drink[]> {
+    return drinks;
+  }
+
+  getBeers(): Readonly<Beer[]> {
+    return beers.map(b => this.getBeerWithPricing(b));
+  }
+
+  getBeverages(): Readonly<Beverage[]> {
+    return beverages;
+  }
+
+  getBeerCost(beer: Beer): number {
+    return beerTypePricing[beer.type];
+  }
+
+  getBeerWithPricing(beer: Pick<Beer, 'name' | 'type'>): Beer {
+    return { ...beer, cost: beerTypePricing[beer.type] };
+  }
+
+  findAllDrinks({ query, type }: { query: string; type: DrinkAutocompleteType }): Drink[] {
+    const pattern = RegexUtils.getSequenceMatcher({ query });
+
+    if (type === 'beers') {
+      return this.getBeers().filter(d => d.name.match(pattern));
+    } else if (type === 'beverages') {
+      return this.getBeverages().filter(d => d.name.match(pattern));
+    } else {
+      return this.getDrinks().filter(d => d.name.match(pattern));
+    }
   }
 }
 
@@ -118,6 +162,51 @@ export const pizzas: Readonly<Pizza[]> = [
     thin: false
   }
 ];
+
+export const beerTypePricing: BeerTypePricing = {
+  Domestic: 3,
+  IPA: 4,
+  Imported: 4
+};
+
+export const beers: Readonly<Beer[]> = [
+  { name: 'Bud Light', type: 'Domestic' },
+  { name: 'Budweiser', type: 'Domestic' },
+  { name: 'Coors Light', type: 'Domestic' },
+  { name: 'Corona', type: 'Imported' },
+  { name: 'Dos Equis', type: 'Imported' },
+  { name: 'Heineken', type: 'Imported' },
+  { name: 'Lagunitas IPA', type: 'IPA' },
+  { name: 'Negra Modelo', type: 'Imported' },
+  { name: 'Pacifico', type: 'Imported' },
+  { name: 'Sierra Nevada Pale Ale', type: 'IPA' },
+  { name: 'Victoria', type: 'Imported' }
+];
+
+export const beverages: Readonly<Beverage[]> = [
+  { name: 'Water', cost: 1.35 },
+  { name: 'Coke', cost: 1.35 },
+  { name: 'Diet Coke', cost: 1.35 },
+  { name: 'Pepsi', cost: 1.35 },
+  { name: 'Diet Pepsi', cost: 1.35 },
+  { name: 'A&W Rootbeer', cost: 1.35 },
+  { name: 'Diet A&W Rootbeer', cost: 1.35 },
+  { name: 'Mug Rootbeer', cost: 1.35 },
+  { name: '7up', cost: 1.35 },
+  { name: 'Diet 7up', cost: 1.35 },
+  { name: 'Crush', cost: 1.35 },
+  { name: 'Nestea', cost: 1.35 },
+  { name: 'Kerns', cost: 1.8 },
+  { name: 'Orange Juice', cost: 2 },
+  { name: 'Mango Juice', cost: 2 },
+  { name: 'Cranberry Juice', cost: 2 },
+  { name: 'Snapple', cost: 2.75 },
+  { name: 'Gatorage', cost: 2.75 },
+  { name: 'Mexican Coke', cost: 2.75 },
+  { name: 'Two Liter Soda', cost: 3 }
+];
+
+export const drinks: Readonly<Drink[]> = [...beverages, ...beers];
 
 export const basePizzaPricing: Readonly<BasePricingChart> = {
   slice: { cost: 3.75, toppingCost: 0.4 },
