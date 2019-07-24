@@ -1,0 +1,8 @@
+<div>
+  <h5>{{ drink.name }}</h5>
+  <h6><i>{{ drink.cost | currency }}</i></h6>
+  <ng-container *ngIf="isBeer()">
+    <small>({{ getBeer().type }})</small>
+  </ng-container>
+
+</div>

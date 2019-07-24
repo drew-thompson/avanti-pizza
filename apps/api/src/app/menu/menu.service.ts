@@ -48,7 +48,7 @@ export class MenuService {
   }
 
   getDrinks(): Readonly<Drink[]> {
-    return drinks;
+    return [...this.getBeers(), ...this.getBeverages()];
   }
 
   getBeers(): Readonly<Beer[]> {

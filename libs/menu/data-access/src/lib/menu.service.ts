@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Pizza, PizzaMenu, PizzaSize, PricingChart, ToppingName } from '@avanti-pizza/api-interface';
+import { Drink, DrinkAutocompleteType, Pizza, PizzaMenu, PizzaSize, PricingChart, ToppingName } from '@avanti-pizza/api-interface';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,5 +23,9 @@ export class MenuService {
 
   calculatePricingChart({ toppings }: { toppings: ToppingName[] }): Observable<PricingChart> {
     return this.http.get<PricingChart>(`/api/menu/pizzas/calculate?complete=true&&toppings=${toppings.join(',')}`);
+  }
+
+  findAllDrinks({ query, type }: { query: string; type?: DrinkAutocompleteType }): Observable<Drink[]> {
+    return this.http.get<Drink[]>(`/api/menu/drinks/autocomplete?q=${query}&type=${type || ''}`);
   }
 }

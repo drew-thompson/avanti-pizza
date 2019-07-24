@@ -4,6 +4,10 @@ mat-form-field.mat-form-field {
 	width: 100%;
 }
 
+mat-radio-button.mat-radio-button {
+	margin-right: 0.5rem;
+}
+
 section {
 	font-size: 0.75rem;
 	@include media-breakpoint-up(sm) {
@@ -21,6 +25,19 @@ button:focus {
 	top: 0;
 	background: white;
 	z-index: 1;
+
+	@include media-breakpoint-down(xs) {
+		&.empty {
+			margin-bottom: 1rem;
+		}
+	}
+}
+
+#drinkForm {
+	margin-top: auto;
+	position: sticky;
+	bottom: 0;
+	background-color: white;
 }
 
 #menu {
