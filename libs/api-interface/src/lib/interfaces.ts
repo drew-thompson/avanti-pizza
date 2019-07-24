@@ -4,26 +4,14 @@ export interface Message {
 
 export type PizzaSize = 'slice' | '12' | '14' | '16' | '18';
 
-export interface PricingChart {
-  slice?: number;
-  '12': number;
-  '14': number;
-  '16': number;
-  '18': number;
-}
-
-export interface BasePricingChart {
-  slice?: BasePricing;
-  '12': BasePricing;
-  '14': BasePricing;
-  '16': BasePricing;
-  '18': BasePricing;
-}
+export type PricingChart = { [T in PizzaSize]: number };
 
 export interface BasePricing {
   cost: number;
   toppingCost: number;
 }
+
+export type BasePricingChart = { [T in PizzaSize]: BasePricing };
 
 export interface Topping {
   /** The name of the topping. */
@@ -114,3 +102,58 @@ export type PizzaName =
   | "Lito's Special"
   | 'Tuscan Chicken'
   | 'Veggie Italiano';
+
+export type BeerType = 'Imported' | 'Domestic' | 'IPA';
+export type BeerTypePricing = { [T in BeerType]: number };
+
+export type BeerName =
+  | 'Heineken'
+  | 'Bud Light'
+  | 'Coors Light'
+  | 'Budweiser'
+  | 'Pacifico'
+  | 'Victoria'
+  | 'Dos Equis'
+  | 'Negra Modelo'
+  | 'Corona'
+  | 'Bud Light'
+  | 'Coors Light'
+  | 'Budweiser'
+  | 'Lagunitas IPA'
+  | 'Sierra Nevada Pale Ale';
+
+export interface Beer {
+  name: BeerName;
+  type: BeerType;
+  cost?: number;
+}
+
+export type BeverageName =
+  | 'Water'
+  | 'Coke'
+  | 'Diet Coke'
+  | 'Pepsi'
+  | 'Diet Pepsi'
+  | 'A&W Rootbeer'
+  | 'Diet A&W Rootbeer'
+  | 'Mug Rootbeer'
+  | '7up'
+  | 'Diet 7up'
+  | 'Crush'
+  | 'Nestea'
+  | 'Kerns'
+  | 'Snapple'
+  | 'Gatorage'
+  | 'Orange Juice'
+  | 'Mango Juice'
+  | 'Cranberry Juice'
+  | 'Mexican Coke'
+  | 'Two Liter Soda';
+
+export interface Beverage {
+  name: BeverageName;
+  cost: number;
+}
+export type DrinkName = BeerName | BeverageName;
+export type Drink = Beer | Beverage;
+export type DrinkAutocompleteType = 'beers' | 'beverages';
