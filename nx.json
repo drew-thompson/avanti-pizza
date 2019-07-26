@@ -58,6 +58,9 @@
     },
     "menu-feature-create": {
       "tags": ["platform:frontend", "type:feature"]
+    },
+    "menu-ui": {
+      "tags": ["platform:frontend", "type:ui"]
     }
   }
 }

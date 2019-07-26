@@ -103,6 +103,8 @@ export type PizzaName =
   | 'Tuscan Chicken'
   | 'Veggie Italiano';
 
+export type FoodAutocompleteType = 'pizzas' | 'toppings' | 'food';
+
 export type BeerType = 'Imported' | 'Domestic' | 'IPA';
 export type BeerTypePricing = { [T in BeerType]: number };
 
@@ -156,4 +158,9 @@ export interface Beverage {
 }
 export type DrinkName = BeerName | BeverageName;
 export type Drink = Beer | Beverage;
-export type DrinkAutocompleteType = 'beers' | 'beverages';
+export type DrinkAutocompleteType = 'beers' | 'beverages' | 'drinks';
+
+/** The type of items on the menu. */
+export type MenuItem = Pizza | Drink;
+export type AutocompleteItem = MenuItem | Topping;
+export type MenuItemAutocompleteType = FoodAutocompleteType | DrinkAutocompleteType;

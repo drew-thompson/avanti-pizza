@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MatOptionSelectionChange } from '@angular/material';
 import { Pizza, PizzaName, PricingChart, Topping } from '@avanti-pizza/api-interface';
 import { MenuService } from '@avanti-pizza/menu/data-access';
+import { MenuAutocompleteComponent } from '@avanti-pizza/menu/ui';
 import { ToppingsService } from '@avanti-pizza/toppings/data-access';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class CreateComponent implements OnInit {
   /** All available toppings. */
   readonly toppings$ = this.toppingsService.getAll();
   /** Input reference needed to clear chip-input. */
-  @ViewChild('input', { static: false }) input: ElementRef<HTMLInputElement>;
+  @ViewChild(MenuAutocompleteComponent, { static: false }) menuAutocomplete: MenuAutocompleteComponent;
 
   /** Control for the current topping being searched.*/
   recipeControl: FormControl = new FormControl('');
@@ -47,7 +47,7 @@ export class CreateComponent implements OnInit {
    */
   reset(): void {
     this.recipeControl.patchValue('');
-    this.input.nativeElement.value = '';
+    this.menuAutocomplete.chipInput.nativeElement.value = '';
   }
 
   /**
@@ -61,21 +61,17 @@ export class CreateComponent implements OnInit {
   /**
    * Select a topping to add from the autocomplete dropdown.
    */
-  select(event: MatOptionSelectionChange, topping: Topping): void {
-    if (event.isUserInput) {
-      const snapshot = this.selectedToppings$.value;
-      this.selectedToppings$.next([...snapshot, topping]);
-      this.reset();
-    }
+  onToppingSelected(topping: Topping): void {
+    const snapshot = this.selectedToppings$.value;
+    this.selectedToppings$.next([...snapshot, topping]);
+    this.reset();
   }
 
   /**
    * Remove a specified topping from the list of selected toppings.
-   * @param topping Topping to remove from selected list of toppings
    */
-  remove(topping: Topping): void {
+  onToppingRemoved(index: number): void {
     const snapshot = this.selectedToppings$.value;
-    const index = snapshot.map(t => t.name).indexOf(topping.name);
     this.selectedToppings$.next([...snapshot.slice(0, index), ...snapshot.slice(index + 1)]);
   }
 

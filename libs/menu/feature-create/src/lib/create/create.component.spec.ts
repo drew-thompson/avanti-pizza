@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomMaterialModule } from '@avanti-pizza/common/ui/custom-material';
 import { MenuService } from '@avanti-pizza/menu/data-access';
+import { MenuUiModule } from '@avanti-pizza/menu/ui';
 import { SharedUiModule } from '@avanti-pizza/shared/ui';
 import { ToppingsService } from '@avanti-pizza/toppings/data-access';
 import { CreateComponent } from './create.component';
@@ -16,7 +17,7 @@ describe('CreateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, BrowserAnimationsModule, ReactiveFormsModule, CustomMaterialModule, SharedUiModule],
+      imports: [HttpClientTestingModule, BrowserAnimationsModule, ReactiveFormsModule, CustomMaterialModule, SharedUiModule, MenuUiModule],
       declarations: [CreateComponent],
       providers: [MenuService, ToppingsService]
     }).compileComponents();

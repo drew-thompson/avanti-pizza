@@ -6,41 +6,11 @@
       <div id="form">
         <h1 class="mb-0">Create a Pizza</h1>
 
-        <mat-form-field appearance="standard">
-          <mat-label>Add some ingredients</mat-label>
-          <mat-chip-list #added>
-            <ng-container *ngFor="let topping of selectedToppings$ | async">
-              <mat-chip [selectable]="true" (removed)="remove(topping)">
-                {{ topping.name }}
-                <mat-icon matChipRemove>clear</mat-icon>
-              </mat-chip>
-            </ng-container>
-
-            <input #input matInput [matAutocomplete]="toppingsAuto" type="search" autocomplete="off"
-              [matChipInputFor]="added" placeholder="Bell Peppers, Tomatoes, Onion..." [formControl]="recipeControl">
-
-          </mat-chip-list>
-          <button matSuffix mat-icon-button matTooltip="Clear all selections" matTooltipPosition="above"
-            (click)="clear()">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-form-field>
-
-        <mat-autocomplete #toppingsAuto autoActiveFirstOption>
-          <ng-container *ngIf="filteredToppings$ | async as filtered">
-
-            <ng-container *ngFor="let topping of filtered">
-              <mat-option (onSelectionChange)="select($event, topping)" [value]="topping.name">
-                <avanti-emboldened-text [query]="recipeControl.value" [text]="topping.name"></avanti-emboldened-text>
-              </mat-option>
-            </ng-container>
-
-            <mat-option *ngIf="!filtered.length" (onSelectionChange)="reset()" value="">
-              Topping not found! 🚫🍅🍄
-            </mat-option>
-
-          </ng-container>
-        </mat-autocomplete>
+        <avanti-menu-autocomplete type="toppings" [control]="recipeControl" [selection]="selectedToppings$ | async"
+          label="Add some ingredients" placeholder="Bell Peppers, Tomatoes, Onion..." suffixIcon="clear"
+          missingOptionText="Topping not found! 🚫🍅🍄" (selected)="onToppingSelected($event)"
+          (removed)="onToppingRemoved($event)" (cleared)="clear()">
+        </avanti-menu-autocomplete>
 
       </div>
 

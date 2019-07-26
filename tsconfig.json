@@ -29,7 +29,8 @@
       "@avanti-pizza/toppings/data-access": ["libs/toppings/data-access/src/index.ts"],
       "@avanti-pizza/common/utils": ["libs/common/utils/src/index.ts"],
       "@avanti-pizza/menu/feature-select": ["libs/menu/feature-select/src/index.ts"],
-      "@avanti-pizza/menu/feature-create": ["libs/menu/feature-create/src/index.ts"]
+      "@avanti-pizza/menu/feature-create": ["libs/menu/feature-create/src/index.ts"],
+      "@avanti-pizza/menu/ui": ["libs/menu/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
