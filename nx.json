@@ -55,6 +55,9 @@
     },
     "menu-feature-select": {
       "tags": ["platform:frontend", "type:feature"]
+    },
+    "menu-feature-create": {
+      "tags": ["platform:frontend", "type:feature"]
     }
   }
 }

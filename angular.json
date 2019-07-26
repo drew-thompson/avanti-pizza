@@ -468,6 +468,34 @@
           "styleext": "scss"
         }
       }
+    },
+    "menu-feature-create": {
+      "projectType": "library",
+      "root": "libs/menu/feature-create",
+      "sourceRoot": "libs/menu/feature-create/src",
+      "prefix": "avanti",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/menu/feature-create/tsconfig.lib.json", "libs/menu/feature-create/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/menu/feature-create/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/menu/feature-create/jest.config.js",
+            "tsConfig": "libs/menu/feature-create/tsconfig.spec.json",
+            "setupFile": "libs/menu/feature-create/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

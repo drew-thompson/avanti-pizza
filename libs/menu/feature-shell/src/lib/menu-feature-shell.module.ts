@@ -8,12 +8,16 @@ import { RouterModule } from '@angular/router';
 
     RouterModule.forChild([
       {
-        path: 'search',
-        loadChildren: () => import('@avanti-pizza/menu/feature-search').then(m => m.MenuFeatureSearchModule)
+        path: 'create',
+        loadChildren: () => import('@avanti-pizza/menu/feature-create').then(m => m.MenuFeatureCreateModule)
       },
       {
         path: 'calculate',
         loadChildren: () => import('@avanti-pizza/menu/feature-calculate').then(m => m.MenuFeatureCalculateModule)
+      },
+      {
+        path: 'search',
+        loadChildren: () => import('@avanti-pizza/menu/feature-search').then(m => m.MenuFeatureSearchModule)
       },
       {
         path: 'select',
