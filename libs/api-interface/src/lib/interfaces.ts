@@ -2,6 +2,11 @@ export interface Message {
   message: string;
 }
 
+export interface Entity {
+  name: string;
+}
+export type EntityKeys = keyof Entity;
+
 export type PizzaSize = 'slice' | '12' | '14' | '16' | '18';
 
 export type PricingChart = { [T in PizzaSize]: number };
@@ -13,16 +18,16 @@ export interface BasePricing {
 
 export type BasePricingChart = { [T in PizzaSize]: BasePricing };
 
-export interface Topping {
+export interface Topping extends Entity {
   /** The name of the topping. */
-  name?: ToppingName;
+  name: ToppingName;
   /** Whether the topping will be billed as a premium ingredient. */
   premium: boolean;
   /** Whether the topping is included in the recipe without charge. */
   included?: boolean;
 }
 
-export interface Pizza {
+export interface Pizza extends Entity {
   name: PizzaName;
   description: string;
   thin: boolean;
@@ -103,6 +108,7 @@ export type PizzaName =
   | 'Tuscan Chicken'
   | 'Veggie Italiano';
 
+export type Food = Pizza | Topping;
 export type FoodAutocompleteType = 'pizzas' | 'toppings' | 'food';
 
 export type BeerType = 'Imported' | 'Domestic' | 'IPA';
@@ -124,7 +130,7 @@ export type BeerName =
   | 'Lagunitas IPA'
   | 'Sierra Nevada Pale Ale';
 
-export interface Beer {
+export interface Beer extends Entity {
   name: BeerName;
   type: BeerType;
   cost?: number;
@@ -152,7 +158,7 @@ export type BeverageName =
   | 'Mexican Coke'
   | 'Two Liter Soda';
 
-export interface Beverage {
+export interface Beverage extends Entity {
   name: BeverageName;
   cost: number;
 }

@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonPipesModule } from '@avanti-pizza/common/pipes';
 import { CustomMaterialModule } from '@avanti-pizza/common/ui/custom-material';
 import { MenuDataAccessModule } from '@avanti-pizza/menu/data-access';
+import { MenuUiModule } from '@avanti-pizza/menu/ui';
 import { SharedUiModule } from '@avanti-pizza/shared/ui';
 import { SearchComponent } from './search/search.component';
 
@@ -15,6 +16,7 @@ import { SearchComponent } from './search/search.component';
     MenuDataAccessModule,
     CustomMaterialModule,
     SharedUiModule,
+    MenuUiModule,
     CommonPipesModule,
 
     RouterModule.forChild([

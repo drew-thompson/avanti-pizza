@@ -9,8 +9,8 @@
     </ng-container>
 
 
-    <input #chipInput matInput [matAutocomplete]="auto" type="search" autocomplete="off" [matChipInputFor]="added"
-      [placeholder]="placeholder" [formControl]="control">
+    <input #chipInput matInput (focus)="isFocused = true" (blur)="isFocused = false" [matAutocomplete]="auto"
+      type="search" autocomplete="off" [matChipInputFor]="added" [placeholder]="placeholder" [formControl]="control">
 
   </mat-chip-list>
   <button matSuffix mat-icon-button (click)="onSuffixClicked()">

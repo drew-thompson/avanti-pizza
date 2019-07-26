@@ -3,6 +3,8 @@ import {
   Beverage,
   Drink,
   DrinkAutocompleteType,
+  Food,
+  FoodAutocompleteType,
   Pizza,
   PizzaMenu,
   PizzaSize,
@@ -26,7 +28,12 @@ export class MenuController {
     }, {});
   }
 
-  @Get('pizzas')
+  @Get('food/autocomplete')
+  findAllFood(@Query('q') query: string, @Query('type') type?: FoodAutocompleteType): Food[] {
+    return this.menuService.findAllFood({ query, type });
+  }
+
+  @Get('food/pizzas')
   getPizzas(): Pizza[] {
     return this.menuService.getPizzas();
   }
@@ -37,7 +44,7 @@ export class MenuController {
    * @param size Size of the pizza
    * @param toppings Toppings served hot!
    */
-  @Get('pizzas/calculate')
+  @Get('food/pizzas/calculate')
   calculatePrice(
     @Query('complete') complete: boolean,
     @Query('size') size: PizzaSize,
@@ -66,7 +73,7 @@ export class MenuController {
   }
 
   @Get('drinks/autocomplete')
-  findAll(@Query('q') query: string, @Query('type') type?: DrinkAutocompleteType): Drink[] {
+  findAllDrinks(@Query('q') query: string, @Query('type') type?: DrinkAutocompleteType): Drink[] {
     return this.menuService.findAllDrinks({ query, type });
   }
 

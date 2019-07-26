@@ -5,10 +5,12 @@ import {
   Beverage,
   Drink,
   DrinkAutocompleteType,
+  Food,
   Pizza,
   PizzaSize,
   PricingChart,
-  Topping
+  Topping,
+  FoodAutocompleteType
 } from '@avanti-pizza/api-interface';
 import { RegexUtils } from '@avanti-pizza/common/utils';
 import { Injectable } from '@nestjs/common';
@@ -76,6 +78,19 @@ export class MenuService {
       return this.getBeverages().filter(d => d.name.match(pattern));
     } else {
       return this.getDrinks().filter(d => d.name.match(pattern));
+    }
+  }
+
+  findAllFood({ query, type }: { query: string; type: FoodAutocompleteType }): Food[] {
+    const pattern = RegexUtils.getSequenceMatcher({ query });
+
+    if (type === 'pizzas') {
+      return this.getPizzas().filter(p => p.name.match(pattern));
+    } else if (type === 'toppings') {
+      // TODO: Migrate toppings into menu domain
+      return this.toppingsService.findAllToppings(query);
+    } else {
+      return [...this.getPizzas(), ...this.toppingsService.getAllToppings()].filter(food => food.name.match(pattern));
     }
   }
 }

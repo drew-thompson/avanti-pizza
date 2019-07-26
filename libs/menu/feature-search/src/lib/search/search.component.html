@@ -6,33 +6,11 @@
       <div id="form" [class.empty]="!(selectedPizza$ | async)">
         <h1 class="mb-0">Find a Pizza</h1>
 
-        <mat-form-field appearance="standard">
-          <mat-label>Search a Pizza</mat-label>
-          <input matInput [matAutocomplete]="auto" type="search" autocomplete="off"
-            placeholder="I'll show you a Lito Special!" [formControl]="searchControl">
-          <button matSuffix mat-icon-button (click)="resetPizzaSearch()">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-form-field>
+        <avanti-menu-autocomplete #pizzaAutocomplete type="pizzas" [control]="searchControl" label="Search a Pizza"
+          placeholder="I'll show you a Lito Special!" missingOptionText="Pizza not found! 🙀🔍❓"
+          (selected)="onPizzaSelected($event)" (cleared)="resetPizzaSearch()">
+        </avanti-menu-autocomplete>
 
-        <mat-autocomplete #auto autoActiveFirstOption>
-          <ng-container *ngIf="filteredPizzas$ | async as filtered">
-
-            <ng-container *ngFor="let pizza of filtered">
-
-              <mat-option (onSelectionChange)="select($event, pizza)" [value]="pizza.name">
-                <avanti-emboldened-text [query]="searchControl.value" [text]="pizza.name" color="accent">
-                </avanti-emboldened-text>
-              </mat-option>
-
-            </ng-container>
-
-            <mat-option *ngIf="!filtered.length" (onSelectionChange)="resetPizzaSearch()" value="">
-              Pizza not found! 🙀🔍❓
-            </mat-option>
-
-          </ng-container>
-        </mat-autocomplete>
       </div>
 
       <ng-container *ngIf="selectedPizza$ | async as selected">
@@ -46,33 +24,16 @@
 
         <label id="drink-radio-group-label" class="d-block">Search for a Drink</label>
         <mat-radio-group aria-labelledby="drink-radio-group-label" [formControl]="drinkTypeControl">
-          <mat-radio-button value="all">All</mat-radio-button>
+          <mat-radio-button value="drinks">All</mat-radio-button>
           <mat-radio-button value="beverages">Beverages</mat-radio-button>
           <mat-radio-button value="beers">Beers</mat-radio-button>
         </mat-radio-group>
-        <mat-form-field appearance="standard">
-          <mat-label>Add a Drink</mat-label>
-          <input #drinksAutoTrigger matInput [matAutocomplete]="drinksAuto" [formControl]="drinkSearchControl">
-          <button matSuffix mat-icon-button (click)="resetDrinkSearch()">
-            <mat-icon>clear</mat-icon>
-          </button>
-        </mat-form-field>
 
-        <mat-autocomplete #drinksAuto autoActiveFirstOption>
-          <ng-container *ngIf="filteredDrinks$ | async as filtered">
+        <avanti-menu-autocomplete #drinkAutocomplete [type]="selectedDrinkFilter$ | async"
+          [control]="drinkSearchControl" label="Add a Drink" placeholder="Drink, drink, drink drink"
+          missingOptionText="Drink not found :(" (selected)="onDrinkSelected($event)" (cleared)="resetDrinkSearch()">
+        </avanti-menu-autocomplete>
 
-            <ng-container *ngFor="let drink of filtered">
-              <mat-option (onSelectionChange)="select($event, drink)" [value]="drink.name">
-                <avanti-emboldened-text [query]="drinkSearchControl.value" [text]="drink.name"></avanti-emboldened-text>
-              </mat-option>
-            </ng-container>
-
-            <ng-container *ngIf="!filtered.length">
-              <mat-option (onSelectionChange)="resetDrinkSearch()" value="">Drink not found :(</mat-option>
-            </ng-container>
-
-          </ng-container>
-        </mat-autocomplete>
       </div>
 
     </div>

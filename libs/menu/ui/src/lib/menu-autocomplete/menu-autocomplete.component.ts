@@ -1,9 +1,21 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { ESCAPE } from '@angular/cdk/keycodes';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatOptionSelectionChange } from '@angular/material';
 import { AutocompleteItem, MenuItemAutocompleteType } from '@avanti-pizza/api-interface';
 import { MenuService } from '@avanti-pizza/menu/data-access';
-import { ToppingsService } from '@avanti-pizza/toppings/data-access';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
@@ -13,7 +25,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   styleUrls: ['./menu-autocomplete.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MenuAutocompleteComponent implements OnInit {
+export class MenuAutocompleteComponent implements OnInit, OnChanges {
   /** The element reference to the input within a mat-chip-list. */
   @ViewChild('chipInput', { static: false }) chipInput: ElementRef<HTMLInputElement>;
   /** The type of autocomplete to filter through. */
@@ -27,7 +39,7 @@ export class MenuAutocompleteComponent implements OnInit {
   /** Placeholder to display in form field input. */
   @Input() placeholder: string;
   /** Icon to display within form field suffix button. */
-  @Input() suffixIcon: string;
+  @Input() suffixIcon = 'clear';
   /** Whether the autcomplete will open with its first option active. */
   @Input() autoActiveFirstOption = true;
   /** Highlight color to apply to matched characters. */
@@ -36,6 +48,8 @@ export class MenuAutocompleteComponent implements OnInit {
   @Input() missingOptionText: string;
   /** Time between observable input event dispatches. */
   @Input() debounceTime = 125;
+  /** Whether the component will emit a cleared event when focused and on the escape key press. */
+  @Input() clearOnEscape = true;
 
   /** Emits the selected menu item upon a user action. */
   @Output() selected: EventEmitter<AutocompleteItem> = new EventEmitter<AutocompleteItem>();
@@ -44,9 +58,19 @@ export class MenuAutocompleteComponent implements OnInit {
   /** Emits when a user removes a chip from the chip list. */
   @Output() removed: EventEmitter<number> = new EventEmitter<number>();
 
+  /** All currently filtered autocomplete results. */
   filtered$: Observable<AutocompleteItem[]>;
+  /** Whether the input is focused. */
+  isFocused: boolean;
 
-  constructor(private toppingsService: ToppingsService, private menuService: MenuService) {}
+  constructor(private menuService: MenuService) {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    const change = changes.type;
+    if (change) {
+      this.setFilteredStream();
+    }
+  }
 
   ngOnInit() {
     this.setFilteredStream();
@@ -79,18 +103,16 @@ export class MenuAutocompleteComponent implements OnInit {
     }
   }
 
+  clearInput(): void {
+    this.chipInput.nativeElement.value = '';
+  }
+
   private setFilteredStream(): void {
-    switch (this.type) {
-      case 'toppings':
-        this.filtered$ = this.getDebouncedValueChanges().pipe(switchMap(query => this.toppingsService.findAll(query)));
-        break;
-      case 'food':
-        break;
-
-      case 'drinks':
-
-      default:
-        break;
+    const type = this.type;
+    if (type === 'drinks' || type === 'beers' || type === 'beverages') {
+      this.filtered$ = this.getDebouncedValueChanges().pipe(switchMap(query => this.menuService.findAllDrinks({ query, type })));
+    } else if (type === 'food' || type === 'pizzas' || type === 'toppings') {
+      this.filtered$ = this.getDebouncedValueChanges().pipe(switchMap(query => this.menuService.findAllFood({ query, type })));
     }
   }
 
@@ -99,5 +121,13 @@ export class MenuAutocompleteComponent implements OnInit {
       debounceTime(this.debounceTime),
       distinctUntilChanged()
     );
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  onKeyPress(event: KeyboardEvent) {
+    // tslint:disable-next-line: deprecation
+    if (this.clearOnEscape && event.keyCode === ESCAPE) {
+      this.cleared.emit();
+    }
   }
 }

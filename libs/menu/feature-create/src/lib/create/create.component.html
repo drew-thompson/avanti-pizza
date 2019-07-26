@@ -7,7 +7,7 @@
         <h1 class="mb-0">Create a Pizza</h1>
 
         <avanti-menu-autocomplete type="toppings" [control]="recipeControl" [selection]="selectedToppings$ | async"
-          label="Add some ingredients" placeholder="Bell Peppers, Tomatoes, Onion..." suffixIcon="clear"
+          label="Add some ingredients" placeholder="Bell Peppers, Tomatoes, Onion..."
           missingOptionText="Topping not found! 🚫🍅🍄" (selected)="onToppingSelected($event)"
           (removed)="onToppingRemoved($event)" (cleared)="clear()">
         </avanti-menu-autocomplete>

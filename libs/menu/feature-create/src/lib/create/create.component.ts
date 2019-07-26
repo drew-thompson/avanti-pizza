@@ -5,7 +5,7 @@ import { MenuService } from '@avanti-pizza/menu/data-access';
 import { MenuAutocompleteComponent } from '@avanti-pizza/menu/ui';
 import { ToppingsService } from '@avanti-pizza/toppings/data-access';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'avanti-create',
@@ -21,8 +21,6 @@ export class CreateComponent implements OnInit {
 
   /** Control for the current topping being searched.*/
   recipeControl: FormControl = new FormControl('');
-  /** All toppings that have been found based on the current query, minus any already selected toppings (if cannot add duplicates). */
-  filteredToppings$: Observable<Topping[]>;
   /** Pricing chart for pizza with currently selected ingredients. */
   pricingChart$: Observable<PricingChart>;
   /** All toppings that have been added to the pizza. */
@@ -31,12 +29,6 @@ export class CreateComponent implements OnInit {
   constructor(private menuService: MenuService, private toppingsService: ToppingsService) {}
 
   ngOnInit() {
-    this.filteredToppings$ = this.recipeControl.valueChanges.pipe(
-      debounceTime(125),
-      distinctUntilChanged(),
-      switchMap(query => this.toppingsService.findAll(query))
-    );
-
     this.selectedToppings$.pipe(map(toppings => toppings.map(t => t.name))).subscribe(toppings => {
       this.pricingChart$ = this.menuService.calculatePricingChart({ toppings });
     });
@@ -47,7 +39,7 @@ export class CreateComponent implements OnInit {
    */
   reset(): void {
     this.recipeControl.patchValue('');
-    this.menuAutocomplete.chipInput.nativeElement.value = '';
+    this.menuAutocomplete.clearInput();
   }
 
   /**
